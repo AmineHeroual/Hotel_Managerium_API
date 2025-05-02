@@ -19,7 +19,7 @@ from .views import CurrentUserView
 urlpatterns = [
     path("token/", EmailTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path('register/', RegisterView.as_view(), name='register'),
-    path('auth/users/me/', CurrentUserView.as_view(), name='current_user'),
+    path('me/', CurrentUserView.as_view(), name='current_user'),
 
 ]
 

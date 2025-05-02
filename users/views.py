@@ -18,6 +18,10 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import UserSerializer
 from rest_framework.views import APIView
 
+
+from rest_framework.generics import RetrieveAPIView
+
+
 class EmailTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
     # permission_classes = [AllowAny]
@@ -29,13 +33,23 @@ class RegisterView(generics.CreateAPIView):
     
 
 
-class CurrentUserView(APIView):
-    permission_classes = [AllowAny]
+# class CurrentUserView(APIView):
+#     permission_classes = [AllowAny]
 
-    def get(self, request):
-        print("✅ USER DEBUG:")
-        print("First Name:", request.user.first_name)
-        print("Last Name:", request.user.last_name)
-        print("Role:", request.user.role)
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data)
+#     def get(self, request):
+#         print("✅ USER DEBUG:")
+#         print("First Name:", request.user.first_name)
+#         print("Last Name:", request.user.last_name)
+#         print("Role:", request.user.role)
+#         serializer = UserSerializer(request.user)
+#         return Response(serializer.data)
+
+
+
+class CurrentUserView(RetrieveAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+

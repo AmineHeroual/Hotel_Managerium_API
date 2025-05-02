@@ -24,7 +24,7 @@ class User(AbstractUser):
         ('receptionist', 'Receptionist'),
         ('technician', 'Technician'),
     )
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES ,default='receptionist')
     email = models.EmailField(unique=True)  # جعل email حقلًا فريدًا
     # account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPE_CHOICES, default='client')
     # تحديد email كحقل تسجيل الدخول الرئيسي
